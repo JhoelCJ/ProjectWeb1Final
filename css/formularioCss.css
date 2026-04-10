@@ -1,0 +1,239 @@
+@charset "utf-8";
+
+.contenedor {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 6px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border: 1px solid #e0e0e0;
+    border-top: 4px solid #003366;
+    max-width: 600px;
+    margin: 40px auto;
+}
+
+.contenedor h2, .contenedor h1 {
+    color: #333;
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    font-weight: 400;
+}
+
+fieldset {
+    border: 1px solid #e0e0e0;
+    padding: 20px;
+    margin-bottom: 25px;
+    border-radius: 4px;
+    background-color: #fafafa;
+}
+
+legend {
+    font-weight: 600;
+    color: #00509d;
+    padding: 0 10px;
+    font-size: 0.9rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+select {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #fff;
+    transition: border-color 0.3s;
+}
+
+input:focus, select:focus {
+    border-color: #00509d;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 80, 157, 0.1);
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+.form-group {
+    flex: 1;
+}
+
+input[type="submit"], 
+input[type="reset"],
+button {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+input[type="submit"] {
+    background-color: #003366;
+    color: white;
+}
+input[type="submit"]:hover {
+    background-color: #002244;
+}
+
+input[type="reset"] {
+    background-color: #6c757d;
+    color: white;
+    margin-left: 10px;
+}
+input[type="reset"]:hover {
+    background-color: #5a6268;
+}
+
+.w3-panel { 
+    background-color: #fff3cd;
+    color: #856404;
+    padding: 15px;
+    border: 1px solid #ffeeba;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+}
+
+.modal-overlay {
+    display: none; 
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(2px); 
+}
+
+
+.modal-content-corp {
+    background-color: #fdfdfd;
+    margin: 5% auto;
+    width: 100%;
+    max-width: 500px; 
+    border-radius: 6px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    border: 1px solid #ccc;
+    animation: slideDown 0.3s ease-out;
+    position: relative;
+}
+
+@keyframes slideDown {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+
+.modal-header {
+    background-color: #003366; /* Azul Corporativo */
+    color: white;
+    padding: 15px 20px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.close-btn {
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1;
+}
+.close-btn:hover { color: #ff6b6b; }
+
+.modal-body {
+    padding: 25px;
+}
+
+
+.alumno-info {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    font-size: 1rem;
+    color: #555;
+}
+.alumno-info b { color: #003366; }
+
+
+.notas-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.nota-input-group label {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 5px;
+    display: block;
+    text-align: center;
+}
+
+.nota-input-group input {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.resultado-panel {
+    background-color: #e9ecef;
+    border: 1px solid #dee2e6;
+    padding: 15px;
+    border-radius: 4px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.promedio-valor {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #003366;
+    display: block;
+}
+
+.estado-mensaje {
+    font-size: 0.9rem;
+    margin-top: 5px;
+    font-weight: 600;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}

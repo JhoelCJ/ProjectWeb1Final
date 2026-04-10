@@ -1,0 +1,53 @@
+@charset "utf-8";
+
+body{
+    background-color: #495057;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: #fff;
+    font-size: 0.9rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+th {
+    background-color: #f8f9fa;
+    color: #495057;
+    font-weight: 600;
+    text-align: left;
+    padding: 12px 15px;
+    border-bottom: 2px solid #dee2e6;
+    border-top: 1px solid #dee2e6;
+}
+
+td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #dee2e6;
+    color: #212529;
+}
+
+tr:nth-child(even) { background-color: #fcfcfc; }
+tr:hover { background-color: #f1f3f5; }
+
+td button, td a.boton {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    border-radius: 3px;
+    margin-right: 5px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.w3-green, .btn-editar { background-color: #28a745; color: white; }
+.w3-red, .btn-eliminar { background-color: #dc3545; color: white; }
+.w3-blue, .btn-info { background-color: #17a2b8; color: white; }
+
+.estado { font-weight: 600; font-size: 0.85rem; }
+.estado.activo { color: #28a745; }
+.estado.inactivo { color: #dc3545; }
+.aprobado { color: #28a745; font-weight: bold; }
+.reprobado { color: #dc3545; font-weight: bold; }
+.supletorio { color: #fd7e14; font-weight: bold; }
