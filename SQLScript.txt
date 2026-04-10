@@ -1,0 +1,157 @@
+-- Crear base de datos
+CREATE DATABASE IF NOT EXISTS proyecto_29797 
+CHARACTER SET utf8mb4 
+COLLATE utf8mb4_0900_ai_ci;
+
+USE proyecto_29797;
+
+-- ========================
+-- TABLA: alumnos
+-- ========================
+CREATE TABLE alumnos (
+  id_alumno INT AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(100) NOT NULL,
+  apellido VARCHAR(100) NOT NULL,
+  cedula VARCHAR(10) NOT NULL UNIQUE,
+  email VARCHAR(100) NOT NULL UNIQUE,
+  usuario VARCHAR(50) NOT NULL UNIQUE,
+  clave VARCHAR(255) NOT NULL,
+  fecha_nacimiento DATE,
+  direccion VARCHAR(200),
+  telefono VARCHAR(20),
+  estado VARCHAR(20) DEFAULT 'activo'
+);
+
+-- ========================
+-- TABLA: rol
+-- ========================
+CREATE TABLE rol (
+  id_rol INT AUTO_INCREMENT PRIMARY KEY,
+  nombre_rol VARCHAR(50),
+  descripcion_rol VARCHAR(100),
+  estado_rol ENUM('activo','inactivo') DEFAULT 'activo'
+);
+
+-- ========================
+-- TABLA: permisos
+-- ========================
+CREATE TABLE permisos (
+  id_permiso INT AUTO_INCREMENT PRIMARY KEY,
+  nombre_clave VARCHAR(50) UNIQUE NOT NULL,
+  descripcion VARCHAR(100)
+);
+
+-- ========================
+-- TABLA: usuarios
+-- ========================
+CREATE TABLE usuarios (
+  id_user INT AUTO_INCREMENT PRIMARY KEY,
+  nombre_user VARCHAR(100),
+  apellido_user VARCHAR(100),
+  usuario_user VARCHAR(50),
+  cedula_user VARCHAR(10) UNIQUE,
+  estado_user ENUM('activo','inactivo'),
+  clave_user VARCHAR(255),
+  id_rol INT,
+  direccion_user VARCHAR(255),
+  telefono_user VARCHAR(20),
+  fecha_nacimiento DATE,
+  edad INT,
+  intentos_fallidos INT DEFAULT 0,
+  bloqueo_hasta DATETIME,
+  FOREIGN KEY (id_rol) REFERENCES rol(id_rol)
+);
+
+-- ========================
+-- TABLA: cursos
+-- ========================
+CREATE TABLE cursos (
+  id_curso INT AUTO_INCREMENT PRIMARY KEY,
+  nombre_curso VARCHAR(100) NOT NULL,
+  capacidad INT NOT NULL,
+  instructor VARCHAR(100),
+  especialidad VARCHAR(100),
+  estado_curso ENUM('activo','inactivo') DEFAULT 'activo'
+);
+
+-- ========================
+-- TABLA: rol_permisos
+-- ========================
+CREATE TABLE rol_permisos (
+  id_rol INT,
+  id_permiso INT,
+  PRIMARY KEY (id_rol, id_permiso),
+  FOREIGN KEY (id_rol) REFERENCES rol(id_rol) ON DELETE CASCADE,
+  FOREIGN KEY (id_permiso) REFERENCES permisos(id_permiso) ON DELETE CASCADE
+);
+
+-- ========================
+-- TABLA: notas
+-- ========================
+CREATE TABLE notas (
+  id_nota INT AUTO_INCREMENT PRIMARY KEY,
+  id_user INT,
+  id_alumno INT,
+  id_curso INT NOT NULL,
+  nota1 DECIMAL(4,2) DEFAULT 0.00,
+  nota2 DECIMAL(4,2) DEFAULT 0.00,
+  nota3 DECIMAL(4,2) DEFAULT 0.00,
+  promedio DECIMAL(4,2) DEFAULT 0.00,
+  supletorio DECIMAL(4,2),
+  estado_academico VARCHAR(20) DEFAULT 'Cursando',
+  FOREIGN KEY (id_user) REFERENCES usuarios(id_user),
+  FOREIGN KEY (id_alumno) REFERENCES alumnos(id_alumno),
+  FOREIGN KEY (id_curso) REFERENCES cursos(id_curso)
+);
+
+-- ========================
+-- TABLA: auditoria
+-- ========================
+CREATE TABLE auditoria (
+  id_log INT AUTO_INCREMENT PRIMARY KEY,
+  id_user INT,
+  usuario VARCHAR(50),
+  rol VARCHAR(50),
+  permisos TEXT,
+  accion VARCHAR(50),
+  detalle TEXT,
+  fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
+  ip VARCHAR(45)
+);
+
+-- ========================
+-- INSERTS INICIALES
+-- ========================
+
+-- Rol
+INSERT INTO rol (id_rol, nombre_rol, estado_rol)
+VALUES (1, 'Administrador', 'activo');
+
+-- Permisos
+INSERT INTO permisos (id_permiso, nombre_clave, descripcion) VALUES
+(1,'ver_usuarios','Ver listado de usuarios'),
+(2,'crear_usuario','Registrar nuevos usuarios'),
+(3,'editar_usuario','Modificar usuarios existentes'),
+(4,'eliminar_usuario','Eliminar usuarios'),
+(5,'gestionar_roles','Gestionar roles'),
+(6,'asignar_permisos','Asignar permisos'),
+(7,'gestionar_cursos','Gestionar cursos'),
+(8,'matricular_alumnos','Matricular alumnos'),
+(9,'calificar_notas','Calificar notas'),
+(10,'ver_reportes','Ver reportes'),
+(11,'gestionar_alumnos','Gestionar alumnos');
+
+-- Relación rol-permisos (Admin tiene todo)
+INSERT INTO rol_permisos (id_rol, id_permiso)
+SELECT 1, id_permiso FROM permisos;
+
+-- Usuario admin
+INSERT INTO usuarios (
+  id_user, nombre_user, apellido_user, usuario_user,
+  cedula_user, estado_user, clave_user, id_rol, fecha_nacimiento
+) VALUES (
+  1, 'Super', 'Administrador', 'admin',
+  '1700000000', 'activo',
+  '$2y$10$5/mjtaoJ4i5KX1kQ8KWi8.70vneKtS4Yp0p4RBeJ/ZnAx8ccB98Xq',
+  1, '2000-01-01'
+);
